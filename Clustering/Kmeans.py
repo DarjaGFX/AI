@@ -1,6 +1,7 @@
 import numpy as np
 
 def k_means (data, n, weight = None):
+    data = np.array(data)
     ### normalizing Data
     for i in range(0, len(data[0][:])):
         min_d = np.amin(data, axis=0)
@@ -16,7 +17,7 @@ def k_means (data, n, weight = None):
     prevRes = None
     lastRes = None
     while True:
-        if n<len(data[:, 0]):
+        if n>len(data[:,0]):
             print('Desired Cluster Number is Greater than Data Entries ')
             return
         dataTable = []      # dataTable[i] = j     ==>  data[i,:] is in cluster j
@@ -34,21 +35,19 @@ def k_means (data, n, weight = None):
                 dataTemp = np.array(data)
                 cbTemp = np.array(cb)
                 distances.append(np.sqrt(np.sum(weight[:]*((dataTemp[i, :]-cbTemp[j, :])**2))))
-            nn = np.array(distances)
-            dataTable.append(np.argmin(nn))
+            dataTable.append(np.argmin(distances))
 
-# ### START updating CodeBook###
-#         data = np.array(data)
-#         for j in range(n):
-#             count_cluster_j = 0
-#             feature_sum_clstr_i = np.zeros(len(data[0, :]))
-#             for i in range(len(dataTable)):
-#                     if dataTable[i] == j:
-#                         count_cluster_j += 1
-#                         for k in range(len(data[0, :])):
-#                             feature_sum_clstr_i[k] += data[j, k]
-#             cb[j] = feature_sum_clstr_i/count_cluster_j
-# ### END ###
+        ### START updating CodeBook###
+        for j in range(n):
+            count_cluster_j = 0
+            feature_sum_clstr_i = np.zeros(len(data[0, :]))
+            for i in range(len(dataTable)):
+                    if dataTable[i] == j:
+                        count_cluster_j += 1
+                        for k in range(len(data[0, :])):
+                            feature_sum_clstr_i[k] += data[i, k]
+            cb[j] = feature_sum_clstr_i/count_cluster_j
+        ### END ###
 
         lastRes = cb
             
