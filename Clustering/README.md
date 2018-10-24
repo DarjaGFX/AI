@@ -18,3 +18,5 @@
 
 
 "weight , priority of each feature "
+
+returns `centroids`,`classes`,`clusters`.
