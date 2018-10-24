@@ -36,9 +36,6 @@ def k_means (data, n, weight = None):
         .
         [dataN_feature1 , dataN_feature2 , ... dataN_featureM]
         ]
-
-
-        
     """
     data = np.array(data)
     realData = data
