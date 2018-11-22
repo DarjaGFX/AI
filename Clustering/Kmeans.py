@@ -116,7 +116,7 @@ def k_means (data, n, weight = None):
         tmp = []
         for j in range(len(data)):
             if classes[j]==i:
-                tmp.append(realDatadata[j,:])
+                tmp.append(realData[j,:])
         Clusters.append(tmp)
 
     return centroids,classes,Clusters
